@@ -1,0 +1,35 @@
+{
+    "framework-version": 3,
+    "name": "Timeline",
+    "namespace": "InstitutBergonie\\TimelineExternalModule",
+    "description": "Creates a dynamic timeline from a record data.",
+    "authors": [
+        {
+            "name": "Yec'han Laizet",
+            "email": "y.laizet@bordeaux.unicancer.fr",
+            "institution": "Institut Bergonié"
+        }
+    ],
+    "links": {
+        "project": [
+            {
+                "name": "Timeline",
+                "icon": "fas fa-sliders-h",
+                "show-header-and-footer": true,
+                "url": "timeline.php"
+            }
+        ]
+    },
+    "project-settings": [
+        {
+            "key": "parameters",
+            "name": "Parameters",
+            "required": true,
+            "type": "textarea"
+        }
+    ],
+    "compatibility": {
+        "redcap-version-min": "9.0.0",
+        "redcap-version-max": ""
+    }
+}
