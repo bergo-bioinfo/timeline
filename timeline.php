@@ -14,7 +14,7 @@ $definition = json_decode($module->getProjectSetting('parameters'), true);
 // Manage project settings json errors
 switch (json_last_error()) {
     case JSON_ERROR_NONE:
-        $project_json_error = ' - No errors';
+        $project_json_error = '';
     break;
     case JSON_ERROR_DEPTH:
         $project_json_error = ' - Maximum stack depth exceeded';
