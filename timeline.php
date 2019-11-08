@@ -2,13 +2,39 @@
 /**
  * PLUGIN NAME: Dynamic timeline
  * DESCRIPTION: Display Record data as a dynamic timeline
- * VERSION: 2.0.0
+ * VERSION: 2.1.0
  * AUTHOR: Yec'han Laizet <y.laizet@bordeaux.unicancer.fr>
  *
  */
 
 
+$project_json_error = "";
 $definition = json_decode($module->getProjectSetting('parameters'), true);
+
+// Manage project settings json errors
+switch (json_last_error()) {
+    case JSON_ERROR_NONE:
+        $project_json_error = ' - No errors';
+    break;
+    case JSON_ERROR_DEPTH:
+        $project_json_error = ' - Maximum stack depth exceeded';
+    break;
+    case JSON_ERROR_STATE_MISMATCH:
+        $project_json_error = ' - Underflow or the modes mismatch';
+    break;
+    case JSON_ERROR_CTRL_CHAR:
+        $project_json_error = ' - Unexpected control character found';
+    break;
+    case JSON_ERROR_SYNTAX:
+        $project_json_error = ' - Syntax error, malformed JSON';
+    break;
+    case JSON_ERROR_UTF8:
+        $project_json_error = ' - Malformed UTF-8 characters, possibly incorrectly encoded';
+    break;
+    default:
+        $project_json_error = ' - Unknown error';
+    break;
+}
 
 if (isset($_GET['id'])) {
 
@@ -84,6 +110,13 @@ $new_url = $module->getUrl(basename(__FILE__)) . '&id=';
 <div class="red">
     No Timeline configuration detected for this project.
     Go to the left `Application` panel and click on `External Modules` to set the json configuration or ask an administrator if you do not have the permissions.
+</div>
+<?php endif; ?>
+
+<?php if (!empty($project_json_error)): ?>
+<div class="red">
+    The project json configuration has the following error:
+    <?php print $project_json_error; ?>
 </div>
 <?php endif; ?>
 
