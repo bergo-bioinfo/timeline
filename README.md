@@ -50,7 +50,7 @@ The associated value is an array of objects with the following properties:
 
 NOTE: the values are displayed as labels (event, instruments names, ...)
 
-### Example of json configuration for a project without event but with repeats of `Biological Samples` and `Treatmens` instruments:
+### Example of json configuration for a project without event but with repeats of `Biological Samples` and `Treatments` instruments:
 
 ```
 {
