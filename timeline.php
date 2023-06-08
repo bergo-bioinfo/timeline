@@ -75,7 +75,7 @@ if (isset($_GET['id'])) {
             }
             $content = vsprintf($item_def['content_format'], $content_values);
             $start = $line[$item_def['start_field']];
-            $end = null;
+            $end = $line[$item_def['end_field']];
             $items[] = array(
                 "redcap_repeat_scope" => $redcap_repeat_scope,
                 "id" => $i,
