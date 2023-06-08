@@ -2,7 +2,7 @@
 /**
  * PLUGIN NAME: Dynamic timeline
  * DESCRIPTION: Display Record data as a dynamic timeline
- * VERSION: 2.1.1
+ * VERSION: 2.2.0
  * AUTHOR: Yec'han Laizet <y.laizet@bordeaux.unicancer.fr>
  *
  */
