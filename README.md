@@ -18,10 +18,11 @@ Go to the left `Application` panel and click on `External Modules` to set the js
 
 ## Json configuration structure
 
-The configuration consist in an object with 2 properties:
+The configuration consist in an object with 3 properties:
 
 - groups
 - data
+- css
 
 ### groups
 
@@ -50,6 +51,12 @@ The associated value is an array of objects with the following properties:
 
 NOTE: the values are displayed as labels (event, instruments names, ...)
 
+### css
+
+`css` is a string containing css definition of the css classes used by the `className`property of visjs timeline. Check visjs documentation for more details.
+
+Note: css can also be applied directly by using the `style` property of visjs item in `data` configuration.
+
 ### Example of json configuration for a project without event but with repeats of `Biological Samples` and `Treatments` instruments:
 
 ```
@@ -75,6 +82,7 @@ NOTE: the values are displayed as labels (event, instruments names, ...)
         "_": [
             {
                 "group_field":"Register a Patient",
+                "className":"red",
                 "fields":[
                     "patient_birthdate"
                 ],
@@ -84,6 +92,7 @@ NOTE: the values are displayed as labels (event, instruments names, ...)
             },
             {
                 "group_field":"Register a Patient",
+                "style":"background-color: pink;",
                 "fields":[
                     "patient_first_visit_date",
                     "patient_first_visit_service"
@@ -119,7 +128,12 @@ NOTE: the values are displayed as labels (event, instruments names, ...)
                 "end_field":"treatment_end_date"
             }
         ]
-    }
+    },
+    "css": ".vis-item.red {
+  color: white;
+  background-color: red;
+  border-color: darkred;
+}"
 }
 ```
 

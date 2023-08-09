@@ -2,7 +2,7 @@
 /**
  * PLUGIN NAME: Dynamic timeline
  * DESCRIPTION: Display Record data as a dynamic timeline
- * VERSION: 2.2.0
+ * VERSION: 2.3.0
  * AUTHOR: Yec'han Laizet <y.laizet@bordeaux.unicancer.fr>
  *
  */
@@ -75,8 +75,11 @@ if (isset($_GET['id'])) {
             }
             $content = vsprintf($item_def['content_format'], $content_values);
             $start = $line[$item_def['start_field']];
+            if (empty($start)) {
+                $start = 0;
+            }
             $end = $line[$item_def['end_field']];
-            $items[] = array(
+            $item_props = array(
                 "redcap_repeat_scope" => $redcap_repeat_scope,
                 "id" => $i,
                 "group" => $group,
@@ -84,7 +87,17 @@ if (isset($_GET['id'])) {
                 "start" => $start,
                 "end" => $end
             );
-            $i++;
+            // Keep optional/futur visjs properties set in configuration and overwrite the others with calculated values
+            $new_item = array_merge($item_def, $item_props);
+            // Remove keys used for calculated fields (not necessary as it works but cleaner)
+            unset($new_item["redcap_repeat_scope"]);
+            unset($new_item["group_field"]);
+            unset($new_item["fields"]);
+            unset($new_item["content_format"]);
+            if (!empty($start)) {
+                $items[] = $new_item;
+                $i++;
+            }
         }
     }
 }
@@ -111,6 +124,12 @@ $new_url = $module->getUrl(basename(__FILE__)) . '&id=';
     No Timeline configuration detected for this project.
     Go to the left `Application` panel and click on `External Modules` to set the json configuration or ask an administrator if you do not have the permissions.
 </div>
+<?php endif; ?>
+
+<?php if (!empty($definition["css"])): ?>
+<style>
+    <?php print $definition["css"]; ?>
+</style>
 <?php endif; ?>
 
 <?php if (!empty($project_json_error)): ?>
@@ -156,6 +175,7 @@ $new_url = $module->getUrl(basename(__FILE__)) . '&id=';
 <script>
     var groups = <?php print json_encode($definition['groups']); ?>;
     var timedata = <?php print json_encode($items); ?>;
+    // console.log(timedata);
 
     // create visualization
     var container = document.getElementById('visualization');
