@@ -87,6 +87,10 @@ if (isset($_GET['id'])) {
                 "start" => $start,
                 "end" => $end
             );
+            // Fix display issue when start = end date
+            if ($start == $end) {
+                $item_props["end"] = null;
+            }
             // Keep optional/futur visjs properties set in configuration and overwrite the others with calculated values
             $new_item = array_merge($item_def, $item_props);
             // Remove keys used for calculated fields (not necessary as it works but cleaner)
